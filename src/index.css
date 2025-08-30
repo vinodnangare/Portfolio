@@ -81,6 +81,7 @@ body {
 	background: linear-gradient(120deg, #f0fdfa 0%, #99f6e4 50%, #f0fdfa 100%);
 	background-size: 200% 200%;
 	animation: gradientMove 8s ease-in-out infinite;
+	overflow-x: hidden;
 }
 @keyframes gradientMove {
 	0% { background-position: 0% 50%; }

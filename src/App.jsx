@@ -190,14 +190,14 @@ function App() {
         </div>
 
         {/* Main Content */}
-  <div className="flex flex-col w-full md:w-[80%] md:ml-[220px] m-4 md:m-10">
+  <div className="flex flex-col w-full md:w-[80%] md:ml-[220px] px-2 md:px-10 py-4 md:py-10 overflow-x-hidden">
         {/* About Section */}
 
 
-<div
-  id="About"
-  ref={(el) => (sectionRefs.current["About"] = el)}
-  className="glass relative mt-2 flex flex-col shadow-2xl px-6 md:px-10 pt-[40px] md:pt-[60px] py-8 transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 rounded-lg glow-hover"
+  <div
+    id="About"
+    ref={(el) => (sectionRefs.current["About"] = el)}
+    className="glass relative mt-2 flex flex-col shadow-2xl px-2 sm:px-6 md:px-10 pt-[40px] md:pt-[60px] py-8 transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 rounded-lg glow-hover"
 > 
   <div className="absolute top-4 right-4 flex items-center bg-white text-black px-4 py-1 rounded-full shadow-lg border border-gray-300 z-20">
     <span className="relative flex h-3 w-3 mr-2">
@@ -317,7 +317,7 @@ function App() {
           {/* Sub-Cards below About */}
           <div className="grid md:grid-cols-2 gap-6 mt-6">
             {/* Connect With Me */}
-            <div className="glass shadow-2xl rounded-xl p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
+            <div className="glass shadow-2xl rounded-xl p-4 sm:p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
               <h3 className="text-xl font-bold text-gray-800 mb-6 bg-gray-50">
                 Connect With Me
               </h3>
@@ -388,7 +388,7 @@ function App() {
             </div>
 
             {/* Certifications */}
-            <div className="glass shadow-2xl rounded-xl p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
+            <div className="glass shadow-2xl rounded-xl p-4 sm:p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
   <h3 className="text-xl font-bold text-gray-800 mb-6">
     Certifications
   </h3>
@@ -421,7 +421,7 @@ function App() {
           <div
             id="Education"
             ref={(el) => (sectionRefs.current["Education"] = el)}
-            className="glass py-10 px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
+            className="glass py-8 px-2 sm:px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
           >
             <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
               Education
@@ -471,7 +471,7 @@ function App() {
           <div
             id="Projects"
             ref={(el) => (sectionRefs.current["Projects"] = el)}
-            className="glass py-10 px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
+            className="glass py-8 px-2 sm:px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
           >
             <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
               Projects
@@ -484,7 +484,7 @@ function App() {
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Project 1 */}
-              <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-5 bg-gray-50 hover:shadow-black">
+              <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-3 sm:p-5 bg-gray-50 hover:shadow-black">
                 <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden bg-gray-50">
   <img src={Project1} className="w-full h-full object-cover" />
 </div>
@@ -535,7 +535,7 @@ function App() {
               </div>
 
               {/* Project 2 */}
-         <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-5  bg-gray-50  hover:shadow-black">
+         <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-3 sm:p-5 bg-gray-50 hover:shadow-black">
   <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center bg-gray-50">
     <img src={Project2} className="h-full object-contain" />
   </div>
@@ -603,7 +603,7 @@ function App() {
 <div
   id="Skills"
   ref={(el) => (sectionRefs.current["Skills"] = el)}
-  className="glass py-10 px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
+  className="glass py-8 px-2 sm:px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
 >
   <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
     Skills
@@ -611,7 +611,7 @@ function App() {
 
   <div className="grid gap-8">
     {/* Technical Skills as Icon Grid */}
-  <div className="glass bg-teal-50 p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
+  <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
         <Code2 className="mr-2" /> Technical Skills
       </h3>
@@ -659,7 +659,7 @@ function App() {
     {/* Tools & Technologies + Soft Skills in 2-column */}
     <div className="grid md:grid-cols-2 gap-6">
       {/* Tools & Technologies */}
-  <div className="glass bg-teal-50 p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
+  <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
           <Wrench className="mr-2" /> Tools & Technologies
         </h3>
@@ -684,7 +684,7 @@ function App() {
       </div>
 
       {/* Soft Skills */}
-  <div className="glass bg-teal-50 p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
+  <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
           <Users className="mr-2" /> Soft Skills
         </h3>
@@ -712,7 +712,7 @@ function App() {
         <div
           id="Contact"
           ref={(el) => (sectionRefs.current["Contact"] = el)}
-          className="glass py-10 px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
+          className="glass py-8 px-2 sm:px-5 mt-10 shadow-2xl rounded-lg transition-all duration-700 ease-in-out hover:shadow-teal-400 hover:-translate-y-2 glow-hover"
         >
           <h2 className="text-3xl font-bold text-center text-teal-700 mb-8">
             Contact Me
