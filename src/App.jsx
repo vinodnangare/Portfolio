@@ -1,21 +1,22 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "./firebase/firebase";
 import { collection, addDoc, getDoc, doc, updateDoc, onSnapshot, setDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import "./index.css";
 import { Typewriter } from "react-simple-typewriter";
-import img from "./Photo.jpg";
+import img from "./Photo.png";
 import Project1 from "./attendance.png"
 import Project2 from "./insurance.png"
 import {
   MapPin,
   Download,
   SquareArrowOutUpRight,
+  MessageSquareText,
   Code2,
   Wrench,
   Users,
   Github,
+  ChartNoAxesCombined,
   Phone,
   Mail,
   Linkedin,
@@ -41,8 +42,8 @@ function App() {
     About: <User className="inline mr-2 mb-1" size={20} />,
     Education: <GraduationCap className="inline mr-2 mb-1" size={20} />,
     Projects: <FolderKanban className="inline mr-2 mb-1" size={20} />,
-    Skills: <BadgePercent className="inline mr-2 mb-1" size={20} />,
-    Contact: <MessageCircle className="inline mr-2 mb-1" size={20} />,
+    Skills: <ChartNoAxesCombined className="inline mr-2 mb-1" size={20} />,
+    Contact: <MessageSquareText className="inline mr-2 mb-1" size={20} />,
   };
   const sectionRefs = useRef({});
  
@@ -137,44 +138,48 @@ function App() {
   return (
     <>
   <Toaster position="top-center" />
-  {/* Whole Layout */}
   <div className="relative flex flex-col md:flex-row bg-gray-50">
-        {/* Sidebar */}
         <div
-          className="hidden md:flex h-screen bg-gray-50 w-[200px] shadow-2xl fixed left-0 top-0 flex-col items-center"
-        >
-          {/* Profile */}
-          <div className="h-[170px] border-b shadow-xl flex items-center justify-center w-full">
-            <img
-              src={img}
-              className="w-[120px] h-[120px] object-cover rounded-full border-4 border-teal-700"
-              alt="Profile"
-            />
-          </div>
+  className="hidden md:flex h-screen w-[220px] fixed left-0 top-0 flex-col items-center justify-start z-40
+    bg-gradient-to-br from-teal-100 via-white to-teal-50
+    shadow-2xl rounded-r-3xl glass backdrop-blur-lg"
+>
+  <div className="h-[180px] flex items-center justify-center w-full relative mt-6 mb-2">
+    <div className="relative group">
+      <img
+        src={img}
+        className="w-[130px] h-[130px] object-cover rounded-full border-4 border-teal-800 shadow-lg
+          transition-transform duration-300 group-hover:scale-105"
+        alt="Profile"
+      />
+     
+    </div>
+  </div>
+  <div className="flex flex-col items-center mt-3 mx-2 w-full">
+    {sections.map((item) => (
+      <section
+        key={item}
+        onClick={() => handleScroll(item)}
+        className={`font-medium w-full text-xl text-left flex items-center gap-2 p-3 cursor-pointer transition-all duration-300 relative
+          rounded-xl
+          hover:text-teal-700 hover:bg-teal-100 hover:shadow-md
+          ${
+            active === item
+              ? "text-teal-700 font-bold border-l-4 border-teal-700 shadow-lg bg-white"
+              : ""
+          }`}
+        style={{
+          boxShadow: active === item ? "0 4px 24px rgba(20,184,166,0.15)" : undefined,
+        }}
+      >
+        {active === item && <span className="sidebar-indicator" />}
+        <span>{sectionIcons[item]}</span>
+        <span>{item === "Contact" ? "Contact Me" : item}</span>
+      </section>
+    ))}
+  </div>
+</div>
 
-          {/* Menu */}
-          <div className="flex flex-col items-center mt-3 mx-2 w-full">
-            {sections.map((item) => (
-              <section
-                key={item}
-                onClick={() => handleScroll(item)}
-                className={`font-medium w-full text-xl text-left flex items-center gap-2 p-3 cursor-pointer transition-all duration-300 relative
-                  hover:text-teal-700 hover:shadow-md hover:border-l-4 hover:border-teal-400
-                  ${
-                    active === item
-                      ? "text-teal-700 font-bold border-l-4 border-teal-700 shadow-md bg-teal-50"
-                      : ""
-                  }`}
-              >
-                {active === item && <span className="sidebar-indicator" />}
-                <span>{sectionIcons[item]}</span>
-                <span>{item === "Contact" ? "Contact Me" : item}</span>
-              </section>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Nav for Mobile */}
         <div className="fixed bottom-0 left-0 w-full bg-white shadow-2xl flex justify-around py-2 md:hidden z-50">
           {sections.map((item) => (
             <button
@@ -189,11 +194,7 @@ function App() {
           ))}
         </div>
 
-        {/* Main Content */}
   <div className="flex flex-col w-full md:w-[80%] md:ml-[220px] px-2 md:px-10 py-4 md:py-10 overflow-x-hidden">
-        {/* About Section */}
-
-
   <div
     id="About"
     ref={(el) => (sectionRefs.current["About"] = el)}
@@ -226,7 +227,6 @@ function App() {
     )}
   </button>
 
-  {/* text container */}
   <div className="flex flex-col items-center">
     <span className={`text-base font-semibold ${liked ? 'text-pink-400' : 'text-gray-400'}`}>
       {likeCount}
@@ -241,8 +241,6 @@ function App() {
     )}
   </div>
 </div>
-
-
 
    <div className="flex justify-center mb-5 md:hidden">
     <img
@@ -272,7 +270,6 @@ function App() {
     delaySpeed={1500}
   />
 </p>
-
 
   <p className="text-gray-500 flex flex-row items-center justify-center md:justify-start mt-3">
     <MapPin className="h-5" />
@@ -314,15 +311,12 @@ function App() {
   </div>
 </div>
 
-          {/* Sub-Cards below About */}
           <div className="grid md:grid-cols-2 gap-6 mt-6">
-            {/* Connect With Me */}
             <div className="glass shadow-2xl rounded-xl p-4 sm:p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
               <h3 className="text-xl font-bold text-gray-800 mb-6 bg-gray-50">
                 Connect With Me
               </h3>
               <ul className="space-y-6 text-gray-700">
-                {/* Email */}
                 <li className="flex items-start">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-600 text-white mr-4">
                     <Mail size={20} />
@@ -337,8 +331,6 @@ function App() {
                     </a>
                   </div>
                 </li>
-
-                {/* Mobile */}
                 <li className="flex items-start">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-600 text-white mr-4">
                     <Phone size={20} />
@@ -348,8 +340,6 @@ function App() {
                     <span className="text-teal-700">+91 8767071101</span>
                   </div>
                 </li>
-
-                {/* LinkedIn */}
                 <li className="flex items-start">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-600 text-white mr-4">
                     <Linkedin size={20} />
@@ -366,8 +356,6 @@ function App() {
                     </a>
                   </div>
                 </li>
-
-                {/* GitHub */}
                 <li className="flex items-start">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-600 text-white mr-4">
                     <Github size={20} />
@@ -386,8 +374,6 @@ function App() {
                 </li>
               </ul>
             </div>
-
-            {/* Certifications */}
             <div className="glass shadow-2xl rounded-xl p-4 sm:p-6 transition-all duration-700 ease-in-out hover:shadow-gray-400 hover:-translate-y-2 glow-hover">
   <h3 className="text-xl font-bold text-gray-800 mb-6">
     Certifications
@@ -414,10 +400,7 @@ function App() {
     </li>
   </ul>
 </div>
-
           </div>
-
-          {/* Education Section */}
           <div
             id="Education"
             ref={(el) => (sectionRefs.current["Education"] = el)}
@@ -426,9 +409,7 @@ function App() {
             <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
               Education
             </h2>
-
             <div className="relative border-l-4 border-teal-600 ml-10">
-              {/* B.Tech */}
               <div className="mb-10 ml-6">
                 <div className="absolute w-4 h-4 bg-teal-600 rounded-full -left-2.5"></div>
                 <h3 className="text-xl font-semibold text-gray-800">
@@ -440,8 +421,6 @@ function App() {
                 <p className="text-sm text-gray-500">2022 – Present (Last Year)</p>
                 <p className="text-sm text-teal-700 font-semibold mt-1">CGPA: 7.66</p>
               </div>
-
-              {/* HSC */}
               <div className="mb-10 ml-6">
                 <div className="absolute w-4 h-4 bg-teal-600 rounded-full -left-2.5"></div>
                 <h3 className="text-xl font-semibold text-gray-800">
@@ -453,8 +432,6 @@ function App() {
                 <p className="text-sm text-gray-500">2022</p>
                 <p className="text-sm text-teal-700 font-semibold mt-1">64.33%</p>
               </div>
-
-              {/* SSC */}
               <div className="mb-10 ml-6">
                 <div className="absolute w-4 h-4 bg-teal-600 rounded-full -left-2.5"></div>
                 <h3 className="text-xl font-semibold text-gray-800">
@@ -466,8 +443,6 @@ function App() {
               </div>
             </div>
           </div>
-
-          {/* Projects Section */}
           <div
             id="Projects"
             ref={(el) => (sectionRefs.current["Projects"] = el)}
@@ -476,20 +451,15 @@ function App() {
             <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
               Projects
             </h2>
-
             <p className="text-center text-gray-600 mb-10">
               Here are some of my recent projects that showcase my skills in
               full-stack development, UI/UX design, and modern web technologies.
             </p>
-
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Project 1 */}
               <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-3 sm:p-5 bg-gray-50 hover:shadow-black">
                 <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden bg-gray-50">
   <img src={Project1} className="w-full h-full object-cover" />
 </div>
-
-
                 <h3 className="text-2xl font-semibold text-teal-700 mb-3">
                   Attendance Management System
                 </h3>
@@ -497,7 +467,6 @@ function App() {
                   A web-based platform to manage and track student attendance,
                   built with Firebase for real-time data and authentication.
                 </p>
-
                 <h4 className="font-semibold text-gray-800 mb-2">
                   Key Features:
                 </h4>
@@ -507,7 +476,6 @@ function App() {
                   <li>Data storage with Firebase</li>
                   <li>Responsive UI with Tailwind CSS</li>
                 </ul>
-
                 <h4 className="font-semibold text-gray-800 mb-2">
                   Technologies:
                 </h4>
@@ -523,7 +491,6 @@ function App() {
                     )
                   )}
                 </div>
-
                 <div className="flex gap-4">
                   <button className="border-2 border-teal-600 text-teal-600 px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 hover:text-white transition flex items-center" onClick={()=> window.open("https://github.com/vinodnangare/Attendence-Management-System","_blank")}>
                     <Github className="mr-2 h-5 w-5" /> Code
@@ -533,23 +500,18 @@ function App() {
                   </button>
                 </div>
               </div>
-
-              {/* Project 2 */}
          <div className="animated-border border rounded-xl shadow-md hover:shadow-xl transition p-3 sm:p-5 bg-gray-50 hover:shadow-black">
   <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center bg-gray-50">
     <img src={Project2} className="h-full object-contain" />
   </div>
-
   <h3 className="text-2xl font-semibold text-teal-700 mb-3">
     Insurance Management Portal
   </h3>
-
   <p className="text-gray-600 mb-3">
     Designed and developed a responsive web application for managing insurance
     policies, client registrations, renewals, and revenue tracking using modern
     web technologies.
   </p>
-
   <h4 className="font-semibold text-gray-800 mb-2">Key Features:</h4>
   <ul className="list-disc list-inside text-gray-600 mb-4">
     <li>Secure client registration and login</li>
@@ -558,7 +520,6 @@ function App() {
     <li>Record management with expiry alerts</li>
     <li>Mobile-friendly responsive design</li>
   </ul>
-
   <h4 className="font-semibold text-gray-800 mb-2">Technologies:</h4>
   <div className="flex flex-wrap gap-2 mb-4">
     {["React.js", "Tailwind CSS", "Firebase", "JavaScript"].map((tech) => (
@@ -570,7 +531,6 @@ function App() {
       </span>
     ))}
   </div>
-
   <div className="flex gap-4">
     <button
       className="border-2 border-teal-600 text-teal-600 px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 hover:text-white transition flex items-center"
@@ -596,10 +556,8 @@ function App() {
     </button>
   </div>
 </div>
-
             </div>
             </div>
-          {/* Skills Section */}
 <div
   id="Skills"
   ref={(el) => (sectionRefs.current["Skills"] = el)}
@@ -608,15 +566,12 @@ function App() {
   <h2 className="text-3xl font-bold text-center text-teal-700 mb-10">
     Skills
   </h2>
-
   <div className="grid gap-8">
-    {/* Technical Skills as Icon Grid */}
   <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
         <Code2 className="mr-2" /> Technical Skills
       </h3>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 justify-items-center">
-        {/* Skill icons and names */}
         <div className="flex flex-col items-center">
           <FaHtml5 className="text-4xl text-orange-600" />
           <span className="mt-2 text-sm font-medium">HTML</span>
@@ -655,11 +610,8 @@ function App() {
         </div>
       </div>
     </div>
-
-    {/* Tools & Technologies + Soft Skills in 2-column */}
     <div className="grid md:grid-cols-2 gap-6">
-      {/* Tools & Technologies */}
-  <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
+      <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
           <Wrench className="mr-2" /> Tools & Technologies
         </h3>
@@ -682,9 +634,7 @@ function App() {
           ))}
         </div>
       </div>
-
-      {/* Soft Skills */}
-  <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
+      <div className="glass bg-teal-50 p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition glow-hover">
   <h3 className="text-xl font-bold text-teal-700 mb-4 flex items-center bg-gray-50">
           <Users className="mr-2" /> Soft Skills
         </h3>
@@ -708,7 +658,6 @@ function App() {
     </div>
   </div>
 </div>  
-        {/* Contact Me Section */}
         <div
           id="Contact"
           ref={(el) => (sectionRefs.current["Contact"] = el)}
@@ -771,7 +720,6 @@ function App() {
             </button>
           </form>
         </div>
-        {/* End Contact Me Section */}
         </div>
       </div>
       {showTop && (
